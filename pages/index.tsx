@@ -1,22 +1,45 @@
-import React, { useState } from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import styled from 'styled-components';
 import ResultView from '../components/ResultView';
+import SearchBar from '../components/SearchBar';
+import { API_URL } from '../constants';
+import { fetchMockData, getBrandsList } from '../store/searchList';
+import { searchInfo } from '../store/types';
 
 export default function Home() {
-  const [text, setText] = useState<string>('자바스크립트');
+  const dispatch = useDispatch();
+  useEffect(() => {
+    const fetchData = async () => {
+      const res = await fetch(API_URL);
+      const data: searchInfo[] = await res.json();
 
-  setTimeout(() => {
-    // 이 부분 주석
-    // setText(0);
-    // 이 부분 주석 해제
-    setText('타입스크립트');
-  }, 1000);
+      dispatch(fetchMockData(data));
+      dispatch(getBrandsList());
+    };
+
+    fetchData();
+  }, []);
 
   return (
-    <div className="container">
-      <div>
-        <span>{text} 적용 완료</span>
+    <Wrap>
+      <Content>
+        <SearchBar />
         <ResultView />
-      </div>
-    </div>
+      </Content>
+    </Wrap>
   );
 }
+
+const Wrap = styled.div`
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+const Content = styled.div`
+  width: 550px;
+  height: 600px;
+`;

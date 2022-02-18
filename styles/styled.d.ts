@@ -4,9 +4,12 @@ declare module 'styled-components' {
     color: {
       black: string;
       white: string;
-      backgroundGray: string;
       borderGray: string;
+      backgroundGreen: string;
+      backgroundBeige: string;
+      pointGreen: string;
     };
+    borderRadius: string;
     shadow: string;
     font: {
       sizeL: string;
