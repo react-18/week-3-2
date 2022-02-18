@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import ResultView from '../components/ResultView';
 
 export default function Home() {
   const [text, setText] = useState<string>('자바스크립트');
@@ -14,6 +15,7 @@ export default function Home() {
     <div className="container">
       <div>
         <span>{text} 적용 완료</span>
+        <ResultView />
       </div>
     </div>
   );
