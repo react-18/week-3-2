@@ -1,7 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit';
+import SearchListReducer from './searchList';
 
 export const store = configureStore({
-  reducer: {},
+  reducer: {
+    searchList: SearchListReducer,
+  },
 });
 
 export default store;
