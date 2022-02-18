@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { searchInfo } from './types';
 import * as Hangul from 'hangul-js';
+import { BRAND_NAME, PRODUCT_NAME } from '../constants';
 
 const initialState = {
   mockdata: [] as searchInfo[],
@@ -19,7 +20,10 @@ const filterProduct = ({
   searchValue: string;
 }) =>
   targetList.filter((item) => {
-    const modifiedMockData = item.제품명.replaceAll(' ', '').toLowerCase();
+    const modifiedMockData = item[PRODUCT_NAME].replaceAll(
+      ' ',
+      '',
+    ).toLowerCase();
     const modifiedSearchValue = searchValue.replaceAll(' ', '').toLowerCase();
 
     if (Hangul.search(modifiedMockData, modifiedSearchValue) < 0) {
@@ -31,8 +35,8 @@ const filterProduct = ({
 
 const getBrandsInData = (array: searchInfo[]) =>
   array.reduce((brands, item) => {
-    if (item['브랜드'] && !brands.includes(item['브랜드'])) {
-      brands.push(item['브랜드']);
+    if (item[BRAND_NAME] && !brands.includes(item[BRAND_NAME])) {
+      brands.push(item[BRAND_NAME]);
     }
 
     return brands;

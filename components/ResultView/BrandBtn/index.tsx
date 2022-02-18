@@ -1,7 +1,8 @@
 import React from 'react';
+import * as S from './styled';
 
 function BrandBtn({ brandName }: { brandName: string }) {
-  return <button type="button">{brandName}</button>;
+  return <S.BrandButton type="button">{brandName}</S.BrandButton>;
 }
 
 export default BrandBtn;
